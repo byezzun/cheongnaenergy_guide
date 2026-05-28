@@ -1,0 +1,1834 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>청라에너지 지역냉난방 업무길라잡이</title>
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #62717d;
+      --line: #d8e1e7;
+      --soft: #f3f7fb;
+      --paper: #ffffff;
+      --brand: #0072bc;
+      --brand-2: #00a6c8;
+      --accent: #f36f21;
+      --danger: #b54708;
+      --shadow: 0 14px 36px rgba(23, 32, 38, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #fbfcfd;
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner,
+    .hero-inner,
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      min-height: 62px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      color: #004f8f;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      display: block;
+      object-fit: contain;
+      background: white;
+      flex: 0 0 auto;
+    }
+
+    .brand-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .brand:hover .brand-name,
+    .brand:focus-visible .brand-name {
+      color: var(--brand);
+    }
+
+    .brand:focus-visible {
+      outline: 3px solid rgba(0, 114, 188, 0.22);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .button,
+    .icon-button,
+    .quick-button,
+    .category-tab {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+    }
+
+    .button {
+      padding: 0 14px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .icon-button {
+      width: 40px;
+      display: grid;
+      place-items: center;
+    }
+
+    .category-fab {
+      min-height: 52px;
+      border: 1px solid rgba(0, 114, 188, 0.24);
+      border-radius: 8px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--paper);
+      color: #004f8f;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    }
+
+    .category-fab:hover,
+    .category-fab.active {
+      border-color: var(--brand);
+      background: #f4f9fd;
+      transform: translateY(-1px);
+    }
+
+    .button:hover,
+    .icon-button:hover,
+    .quick-button:hover,
+    .category-tab:hover {
+      border-color: var(--brand);
+      color: #004f8f;
+      background: #f4f9fd;
+    }
+
+    .hero {
+      background:
+        linear-gradient(110deg, rgba(7, 31, 52, 0.96), rgba(0, 114, 188, 0.9)),
+        linear-gradient(45deg, rgba(243, 111, 33, 0.16), transparent);
+      color: white;
+    }
+
+    .hero-inner {
+      padding: 48px 20px 76px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 30px;
+      align-items: end;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.05rem;
+    }
+
+    .home-card {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .home-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .home-card span,
+    .chatbot-note {
+      display: block;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.94rem;
+      margin-bottom: 14px;
+    }
+
+    .chatbot-note {
+      margin: 12px 0 14px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .chatbot-note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: white;
+    }
+
+    .home-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .home-link {
+      min-height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 8px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      background: rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .home-link.primary {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .home-link.secondary {
+      background: rgba(243, 111, 33, 0.88);
+      border-color: rgba(243, 111, 33, 0.95);
+    }
+
+    .home-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .home-link.secondary:hover {
+      background: #f36f21;
+    }
+
+    main {
+      padding: 0 20px 56px;
+    }
+
+    .search-panel {
+      margin-top: -46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    #searchInput {
+      width: 100%;
+      min-height: 52px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      outline: none;
+      padding: 0 46px;
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    #searchInput:focus {
+      border-color: var(--brand);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(0, 114, 188, 0.13);
+    }
+
+    .clear-button {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+
+    .quick-searches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .quick-button {
+      border-radius: 999px;
+      padding: 0 13px;
+      color: #004f8f;
+      font-weight: 750;
+    }
+
+    .layout {
+      margin-top: 24px;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 45;
+      width: min(340px, calc(100vw - 36px));
+      border: 1px solid var(--line);
+      border-left: 0;
+      border-radius: 0 8px 8px 0;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      transform: translateX(-105%);
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      border: 0;
+      display: none;
+      background: rgba(23, 32, 38, 0.32);
+    }
+
+    .sidebar-backdrop.open {
+      display: block;
+    }
+
+    .sidebar-head,
+    .section-head {
+      border-bottom: 1px solid var(--line);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .sidebar-head {
+      min-height: 72px;
+      padding-left: 20px;
+    }
+
+    .sidebar-close {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      color: var(--muted);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .count-badge {
+      min-width: 34px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      padding: 0 8px;
+      background: var(--brand);
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .category-list {
+      display: grid;
+      gap: 6px;
+      padding: 8px;
+      max-height: calc(100vh - 74px);
+      overflow: auto;
+    }
+
+    .category-tab {
+      padding: 11px 12px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: transparent;
+    }
+
+    .category-tab.active {
+      border-color: rgba(0, 114, 188, 0.32);
+      background: rgba(0, 114, 188, 0.08);
+      color: #004f8f;
+      font-weight: 800;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--paper);
+      margin-bottom: 18px;
+    }
+
+    .result-list {
+      display: grid;
+    }
+
+    .result-item {
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      text-align: left;
+    }
+
+    .result-question {
+      width: 100%;
+      border: 0;
+      padding: 16px 18px;
+      background: transparent;
+      text-align: left;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .result-item:last-child {
+      border-bottom: 0;
+    }
+
+    .result-question:hover,
+    .result-question[aria-expanded="true"] {
+      background: var(--soft);
+    }
+
+    .result-title {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .result-chevron {
+      color: var(--muted);
+      transition: transform 0.16s ease;
+    }
+
+    .result-question[aria-expanded="true"] .result-chevron {
+      transform: rotate(180deg);
+    }
+
+    .result-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-radius: 999px;
+      padding: 0 8px;
+      background: rgba(0, 114, 188, 0.09);
+      color: #004f8f;
+      font-weight: 750;
+    }
+
+    .answer-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 0 10px;
+      background: rgba(230, 162, 60, 0.18);
+      color: #9b430c;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .answer-body {
+      display: none;
+      padding: 0 18px 20px;
+      color: #2b3339;
+    }
+
+    .result-item.open .answer-body {
+      display: block;
+    }
+
+    .answer-inner {
+      position: relative;
+      border: 1px solid rgba(0, 114, 188, 0.22);
+      border-left: 5px solid var(--brand);
+      border-radius: 8px;
+      padding: 18px 18px 18px 20px;
+      background: #f7fbff;
+      box-shadow: 0 10px 24px rgba(0, 46, 84, 0.06);
+    }
+
+    .answer-kicker {
+      margin: 0 0 12px;
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0 9px;
+      background: rgba(0, 114, 188, 0.11);
+      color: #004f8f;
+      font-size: 0.86rem;
+      font-weight: 850;
+    }
+
+    .answer-content {
+      display: grid;
+      gap: 0;
+    }
+
+    .answer-body p {
+      margin: 0;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(216, 225, 231, 0.82);
+      line-height: 1.75;
+    }
+
+    .answer-body p:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .answer-keywords {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .answer-keywords strong {
+      margin-right: 2px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .keyword-chip {
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      display: inline-flex;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--line);
+      color: #42505a;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .answer-tools {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .empty,
+    .loading {
+      padding: 28px 18px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .source-note {
+      margin-top: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding-top: 38px;
+      }
+
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner,
+      .hero-inner,
+      main {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .category-fab {
+        width: 52px;
+        padding: 0;
+      }
+
+      .category-fab span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" id="top">
+    <div class="topbar-inner">
+      <button class="brand" type="button" id="brandHome" aria-label="처음으로 이동">
+        <img class="brand-mark" src="assets/cheongna-energy-logo.jpg" alt="">
+        <span class="brand-name">청라에너지 업무길라잡이</span>
+      </button>
+      <div class="top-actions">
+        <button class="button" type="button" id="downloadTop">전체 다운로드</button>
+        <button class="icon-button" type="button" id="toTop" aria-label="맨 위로 이동" title="맨 위로 이동">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+            <path d="m6 15 6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>지역난방 키워드를 입력해보세요</h1>
+        <p><b>요금</b>, <b>납부</b>, <b>감면</b>, <b>명의변경</b> 등은<br>키워드만 입력해도 관련 응대 내용을 바로 찾을 수 있습니다.</p>
+      </div>
+      <div class="home-card">
+        <strong>청라에너지 공식 홈페이지</strong>
+        <span>공지사항, 열요금 조회, 고객서비스 메뉴로 이동합니다.</span>
+        <div class="chatbot-note">
+          <strong>빠른 상담이 필요할 때는 AI 챗봇을 이용해보세요.</strong>
+          <b>고객번호 조회</b>, <b>자료 신청</b>, <b>채팅상담사 연결</b> 등은<br>
+          챗봇에서 빠르게 확인할 수 있습니다.
+        </div>
+        <div class="home-actions">
+          <a class="home-link secondary" href="http://www.e-cheongna.co.kr" target="_blank" rel="noopener">
+            홈페이지로 이동해 AI 챗봇 이용하기
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="search-panel" aria-label="FAQ 검색">
+      <div class="search-row">
+        <div class="search-wrap">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m21 21-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="예: 에너지바우처, 자동이체, 기본요금, 명의변경">
+          <button class="clear-button" type="button" id="clearSearch" aria-label="검색어 지우기" title="검색어 지우기">×</button>
+        </div>
+        <button class="category-fab" type="button" id="categoryToggle" aria-label="카테고리 열기" title="카테고리" aria-expanded="false" aria-controls="categorySidebar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <span>카테고리</span>
+        </button>
+      </div>
+      <div class="quick-searches" id="quickSearches" aria-label="추천 검색어"></div>
+    </section>
+
+    <button class="sidebar-backdrop" type="button" id="sidebarBackdrop" aria-label="카테고리 닫기"></button>
+
+    <div class="layout">
+      <aside class="sidebar" id="categorySidebar" aria-label="카테고리 목차" aria-hidden="true">
+        <div class="sidebar-head">
+          <h2>카테고리</h2>
+          <div class="top-actions">
+            <span class="count-badge" id="totalCount">0</span>
+            <button class="sidebar-close" type="button" id="categoryClose" aria-label="카테고리 닫기" title="닫기">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="category-list" id="categoryList"></div>
+      </aside>
+
+      <div class="content">
+        <section class="section" aria-live="polite">
+          <div class="section-head">
+            <div>
+              <h2 id="resultHeading">전체 질문</h2>
+              <p id="resultSummary">시트 데이터를 불러오는 중입니다.</p>
+            </div>
+            <button class="button" type="button" id="resetView">처음으로</button>
+          </div>
+          <div class="result-list" id="resultList">
+            <div class="loading">데이터를 불러오고 있습니다.</div>
+          </div>
+        </section>
+
+        <div class="source-note">
+          운영 기준: 현재 버전은 외부 시트 연결 없이 HTML 파일 내부 데이터만 사용합니다. 카테고리는 질문과 키워드 기준으로 자동 분류됩니다.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const embeddedFaqs = [
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "열요금 감면제도가 있나요?",
+            "answer": "청라에너지에서 시행 중인 감면제도는 공공목적 건물, 냉방용 사용, 최초 열공급 시운전, 사회복지시설, 이주 세대, 영구임대 및 국민임대 주택 등 열공급규정과 관련 법령에 따른 경우에 적용됩니다. 기초생활수급자, 차상위 저소득층, 다자녀가구, 장애인, 국가유공자, 한부모가정 등에 대한 별도 요금할인은 현재 운영하지 않습니다. 다만 정부와 집단에너지사업자가 조성한 사회공헌기금을 통해 차상위계층 지역난방비 지원제도가 한시적으로 운영 중입니다.",
+            "keywords": [
+                  "감면제도",
+                  "기초생활수급자",
+                  "차상위저소득층",
+                  "다자녀가구",
+                  "장애인",
+                  "국가유공자",
+                  "열요금할인",
+                  "사회복지시설",
+                  "임대주택"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처란 무엇이며 어떻게 신청 하나요?",
+            "answer": "에너지바우처는 저소득가정 등 에너지취약계층에게 전기, 도시가스, 지역난방, 등유, 연탄, LPG 등 난방에너지 구입을 지원하는 제도입니다. 소득기준과 가구원 특성기준을 모두 충족하는 가구가 대상이며, 신청은 읍·면·동 주민센터에서 합니다. 자세한 신청자격, 신청기간, 사용기간은 한국에너지공단 에너지바우처 콜센터 1600-3190 또는 홈페이지를 참고합니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "신청방법",
+                  "주민센터",
+                  "에너지취약계층"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 요금차감 및 부과 절차는 어떻게 되나요?",
+            "answer": "에너지바우처는 주민센터 신청, 지자체 선정, 국가바우처시스템 전송, 청라에너지의 감면금액 입력 및 승인, 관리사무소 고지 반영 순서로 처리됩니다. 지역난방은 실물카드가 아니라 고지서에서 일정액을 차감하는 방식입니다. 관리사무소는 세대별 난방요금과 급탕요금 합계 정보를 제공하고, 승인된 감면금액만큼 관리비 고지서에서 할인합니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "차감등록방법",
+                  "요금차감절차",
+                  "행복e음",
+                  "국가바우처시스템"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 관련 사업자 코드 및 고객번호가 무엇인가요?",
+            "answer": "사업자코드는 87입니다. 고객번호는 건물마다 부여된 고유번호이며 요금고지서의 사용자현황 영역에서 확인할 수 있습니다. 고객명, 고객번호, 요금제, 계약면적이 표시되어 있고 270 또는 370으로 시작하는 번호가 고객번호입니다. 청라에너지 AI챗봇에서도 검색할 수 있습니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "사업자코드",
+                  "고객번호",
+                  "요금고지서",
+                  "AI챗봇"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 차감 등록 시 바우처 총금액, 청구금액, 입력기준은 무엇인가요?",
+            "answer": "청구금액은 세대에 감면해줄 난방요금입니다. 세대에 청구 예정인 난방요금, 급탕비, 기본요금, 공동난방비를 포함해 입력합니다. 바우처총금액은 해당 세대가 총 지원받은 금액이며, 바우처 잔액 범위 안에서 차감할 금액을 등록하면 됩니다. 원 단위까지 입력할 수 있고 동·하절기 구분 없이 사용 가능합니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "차감금액",
+                  "청구금액",
+                  "입력기준",
+                  "난방요금감면"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 차감등록 기간이 어떻게 되나요?",
+            "answer": "매월 초 영업일 기준 1일 9시부터 3일째 오후 3시까지입니다. 공휴일이 포함되면 휴일 기간만큼 연장됩니다. 입력기간이 시작되면 등록된 담당자 연락처로 안내문자가 발송되므로 담당자가 변경되면 청라에너지 AI챗봇에서 에너지바우처 담당자 정보를 변경해야 합니다.",
+            "keywords": [
+                  "에너지바우처등록기간",
+                  "매월초",
+                  "영업일기준",
+                  "차감등록"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 차감등록 기간을 놓친 경우에는 어떻게 해야 하나요?",
+            "answer": "입력기간 외에는 입력 및 수정이 불가능하고 기간 연장도 불가능합니다. 이 경우 세대가 행정복지센터에 금전 또는 현물 지급을 신청하는 예외지급 신청이 가능하므로 해당 절차를 안내합니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "등록기간",
+                  "입력기한",
+                  "기간연장불가",
+                  "예외지급"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 감면요청 금액보다 사용요금이 적게 나온 경우 처리방법은 어떻게 하나요?",
+            "answer": "기관으로부터 승인받은 이후라면 다음 달 세대 요금 청구 시 잔액만큼 감면 처리하면 됩니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "금액",
+                  "잔액처리",
+                  "이월감면",
+                  "승인금액"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "사용기간 내에 사용하지 못한 에너지바우처 잔액은 어떻게 되나요?",
+            "answer": "사용기간 내 사용하지 못한 에너지바우처 잔액은 소멸됩니다. 세대가 혜택을 온전히 받을 수 있도록 지역난방 관련 기본요금, 공동난방비, 급탕비를 포함해 감면 처리하는 것이 좋습니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "잔액소멸",
+                  "사용기간",
+                  "바우처사용"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "지난달에 세대가 에너지바우처를 신청했다고 합니다. 그러나 감면대상 목록에 없는데 어떻게 감면 처리 하나요?",
+            "answer": "지자체에서 에너지바우처 신청을 승인한 내역이 시스템으로 전송되는 데 시간이 걸릴 수 있습니다. 청라에너지가 청구하는 시점에 해당 세대가 누락될 수 있으며, 해당 월에 감면되지 않으면 다음 달에 감면됩니다. 행정복지센터 예외지급 신청 가능성도 안내합니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "신청내역",
+                  "시스템전송",
+                  "지자체승인",
+                  "목록확인"
+            ]
+      },
+      {
+            "category": "감면제도/에너지바우처",
+            "question": "에너지바우처 세대가 월 중간에 전출하였습니다. 에너지바우처 차감은 어떻게 하나요?",
+            "answer": "월 중간에 전출하는 세대에는 에너지바우처를 차감할 수 없습니다.",
+            "keywords": [
+                  "에너지바우처",
+                  "전출세대",
+                  "월중전출",
+                  "차감불가",
+                  "이사정산"
+            ]
+      },
+      {
+            "category": "고객정보변경 및 기타행정",
+            "question": "일정 기간 동안의 열요금 입금 확인서 또는 사용 내역은 어떻게 받을 수 있나요?",
+            "answer": "청라에너지 AI챗봇을 통해 입금확인서 또는 사용내역서를 신청하면 1~2일 이내 회신됩니다.",
+            "keywords": [
+                  "열요금입금확인서",
+                  "사용내역서",
+                  "AI챗봇",
+                  "증명서발급",
+                  "입금확인"
+            ]
+      },
+      {
+            "category": "고객정보변경 및 기타행정",
+            "question": "청라에너지 홈페이지에서 월간 사용량을 조회 할 수 있나요?",
+            "answer": "청라에너지 홈페이지 고객서비스의 열요금조회 및 에너지바우처 메뉴에서 고객번호와 식별번호를 입력하면 사용량과 열요금을 조회할 수 있습니다. 식별번호는 세금계산서가 발행되는 고객의 사업자등록번호입니다.",
+            "keywords": [
+                  "사용량조회",
+                  "홈페이지",
+                  "고객번호",
+                  "열요금조회",
+                  "에너지바우처"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "열요금은 어떤 절차로 청구되고 각 세대에서는 어떻게 납부하나요?",
+            "answer": "청라에너지는 건물 전체의 지역난방 열요금을 관리사무소에 부과합니다. 관리사무소는 세대별 난방요금, 급탕요금, 공동난방비 등을 산정해 관리비에 포함하여 각 세대에 부과합니다. 각 세대는 관리비를 관리사무소에 납부하고, 관리사무소는 건물 전체 열요금을 청라에너지에 납부합니다. 청라에너지는 각 세대로부터 직접 징수하지 않습니다.",
+            "keywords": [
+                  "열요금청구",
+                  "열요금부과",
+                  "관리사무소",
+                  "세대납부",
+                  "부과절차"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "청라에너지에서 건물 전체에 부과한 열요금은 각 세대에 어떻게 배분하나여?",
+            "answer": "청라에너지가 건물 전체에 열요금을 부과하면 관리사무소는 기본요금, 사용요금, 공동난방비로 구분해 세대별 요금을 책정합니다. 기본요금은 세대별 난방면적에 따라 정해지고, 사용요금은 세대 계량기로 검침해 산정합니다. 공동난방비는 공동시설 사용량과 열손실 등을 면적 등 기준으로 배분합니다.",
+            "keywords": [
+                  "세대분배",
+                  "관리비부과",
+                  "사용요금",
+                  "기본요금",
+                  "공동난방비"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "열요금표와 세대분배방법(참고용)은 어디서 확인 하나요?",
+            "answer": "열요금 조정에 따른 인상·인하 변동이 있으면 청라에너지 홈페이지 공지사항을 통해 안내합니다. 변동이 없는 경우에는 별도로 공지하지 않습니다.",
+            "keywords": [
+                  "열요금",
+                  "세대분배",
+                  "열요금표",
+                  "공지사항",
+                  "요금조정"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "청라에너지가 건물 전체에 부과한 열요금을 각 세대에 배분 시 온수(급탕비)에 수도료가 포함되는 것인가요?",
+            "answer": "급탕비에는 수도료가 포함되지 않습니다. 급탕용 수돗물은 지자체 수도사업소에서 공급하고, 청라에너지는 수돗물을 가열하는 데 필요한 열에너지를 공급합니다. 따라서 급탕 사용량은 급탕비와 수도요금으로 각각 부과해야 합니다.",
+            "keywords": [
+                  "급탕비",
+                  "수도료",
+                  "상하수도요금",
+                  "온수비용",
+                  "별도부과"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "주거용인 오피스텔인데 요금제가 주택용이 아닌 업무용인 이유는 무엇인가요?",
+            "answer": "오피스텔은 건축법상 주택용이 아닌 업무용시설로 분류됩니다. 주거목적으로 사용하더라도 난방요금은 업무용을 적용받습니다. 계약종별과 건축물 용도 구분은 열공급규정과 건축법 시행령 기준에 따라 청라에너지가 판단합니다.",
+            "keywords": [
+                  "오피스텔계약종별",
+                  "업무용시설",
+                  "건축법",
+                  "주택용전환",
+                  "용도변경"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "기본요금은 어떻게 산정 되며 매월 나오는 이유는 무엇 인가요?",
+            "answer": "기본요금은 사용량과 관계없이 고정적으로 발생하는 감가상각비, 수선유지비, 인건비, 투자보수비 등을 일정 기준에 따라 매월 부과하는 요금입니다. 매월 부과하면 난방비 부담을 연중 분산하는 효과가 있습니다. 사용요금은 연료비 등 변동비와 기본요금으로 회수되지 않는 고정비를 실제 열사용량에 따라 부과합니다.",
+            "keywords": [
+                  "기본요금",
+                  "산정기준",
+                  "고정비용",
+                  "설비유지비",
+                  "공공요금"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "지역난방을 사용하지 않고 있습니다. 기본요금을 내야하나요?",
+            "answer": "기본요금은 사용량과 관계없이 부과되는 금액이므로 난방을 사용하지 않았더라도 납부해야 합니다.",
+            "keywords": [
+                  "기본요금",
+                  "미사용세대",
+                  "고정부과",
+                  "설비비용",
+                  "납부의무"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "열요금고지서와 세금계산서의 금액이 다른 이유는 무엇인가요?",
+            "answer": "요금고지서 금액은 납부 편의를 위해 원 단위를 절사한 값이고, 세금계산서는 실제 발생 금액입니다. 공급가액을 입력하면 부가세가 자동 계산되어 수정할 수 없으며, 회계처리 시 절사된 원 단위 금액은 잡이익으로 처리하면 됩니다.",
+            "keywords": [
+                  "고지서",
+                  "세금계산서",
+                  "원단위절사",
+                  "금액차이",
+                  "납부금액"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "열요금 고지서의 사용량과 세대검침의 사용량 합계가 일치하지 않습니다. 그 이유가 무엇인가요?",
+            "answer": "요금고지서 사용량은 기계실 메인 열량계에서 검침한 양입니다. 여기에는 세대 난방과 급탕 공급 과정에서 발생한 열손실이 포함됩니다. 따라서 세대 검침 사용량 합계와 고지서 사용량에는 차이가 발생할 수 있습니다. 열손실 억제를 위해 배관 보온, 부정사용 점검, 고장 세대 점검, 적정 공급온도 운전이 필요합니다.",
+            "keywords": [
+                  "세대검침",
+                  "사용량",
+                  "메인열량계",
+                  "검침차이",
+                  "기계실검침"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "청라에너지가 설치·소유한 열량계의 고장 등의 사유로 검침이 안 된 경우 열사용량이나 요금은 어떻게 측정·부과하나요?",
+            "answer": "열량계 고장 등으로 정확한 계량이 어려운 경우 열공급규정에 따라 사용량을 산정해 부과합니다. 전월 또는 전년 동월 실적, 계량기 교환 전후 실적, 사용설비와 사용기간, 단위면적당 열소비량 등을 기준으로 산정할 수 있습니다.",
+            "keywords": [
+                  "열량계고장",
+                  "열사용량산정",
+                  "열공급규정",
+                  "추정검침",
+                  "고장수리"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "열원에서 멀리 떨어져 있는 지역은 열수송 과정에서 열량 손실이 많을 것 같은데 원거리 주민에 대한 보상이나 거리에 따른 요금차이가 있나요?",
+            "answer": "청라에너지는 열원시설과의 거리와 관계없이 모든 고객에게 동일 기준으로 요금을 부과합니다. 열수송관은 이중보온관으로 열손실이 미약한 수준이며, 거리별 열손실 계측은 비용 대비 효익이 낮습니다. 따라서 거리 차등요금이나 원거리 주민 보상체계는 운영하지 않습니다.",
+            "keywords": [
+                  "열손실",
+                  "동일기준",
+                  "원거리공급",
+                  "열요금단가",
+                  "공급규정"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "청라에너지의 열요금 산정방법은 Mcal당으로 계산됩니다. 여기서 Mcal는 무엇을 의미하나요? Mcal를 Ton으로 어떻게 환산하나요?",
+            "answer": "칼로리는 표준대기압에서 물 1g을 1℃ 올리는 데 필요한 열량입니다. 열량계 기준의 열요금단가를 Ton당 단가로 환산하는 것은 실질적으로 어렵습니다. 외기온도, 공급온도, 회수온도, 사용량이 실시간으로 달라지기 때문입니다. 참고로 1Gcal은 1000Mcal입니다.",
+            "keywords": [
+                  "단위환산",
+                  "Mcal",
+                  "칼로리정의",
+                  "열량단위",
+                  "요금계산"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "지역난방 열요금은 1년에 몇 번 조정되나요?",
+            "answer": "지역난방 열요금은 1년에 최대 6회, 매 홀수월 조정됩니다. 도시가스요금과 밀접하게 연동되며, 도시가스요금은 국제유가보다 대체로 3~5개월 늦게 변동합니다.",
+            "keywords": [
+                  "열요금조정",
+                  "도시가스연동",
+                  "연6회조정",
+                  "홀수월",
+                  "요금변동"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "지역난방의 열요금이 지역마다 다른 이유는 무엇인가요?",
+            "answer": "지역난방 열요금은 지역별 열생산 방식, 연료비, 공급 규모, 수요 밀도, 설비 투자비, 운영비 등의 차이에 따라 달라질 수 있습니다. 각 지역의 생산 및 공급 원가를 반영하여 산정되므로 사업자별 차이가 발생할 수 있습니다.",
+            "keywords": [
+                  "열요금단가",
+                  "지역별차이",
+                  "원가구조",
+                  "공급비용",
+                  "사업자별요금"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "청라에너지의 열요금 단가표를 토대로 각 세대에 부과 된 요금과 차이가 나는 이유가 무엇이고, 단지마다 단가가 다른 이유는 무엇인가요?",
+            "answer": "세대 부과용 난방단가는 단지별 운영조건, 외기온도, 공동난방비 포함 여부 등에 따라 매월 달라질 수 있습니다. 공급온도, 외기보상운전, 자동제어 상태, 건물 단열상태, 입주율, 열사용패턴, 세대 계량기 상태, 검침일 차이, 배관 열손실, 급탕수 공급온도 등이 단가 차이에 영향을 줍니다.",
+            "keywords": [
+                  "열요금",
+                  "난방단가",
+                  "단지별운영",
+                  "외기온도",
+                  "세대부과금액"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "열요금 세대 분배 시 겨울철 열요금 단가가 다른 계절에 비해 더 높은 이유는 무엇인가요?",
+            "answer": "겨울철에는 수돗물 온도가 낮아 같은 급탕 온도까지 가열하는 데 더 많은 열량이 필요합니다. 따라서 같은 온도로 가열하더라도 겨울철에는 열량이 더 많이 필요하고 요금단가도 높아질 수 있습니다.",
+            "keywords": [
+                  "열요금단가",
+                  "겨울",
+                  "계절별차이",
+                  "수돗물온도",
+                  "급탕비용"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "수요관리형 요금제란 무엇이고, 어떻게 신청해야 하나요?",
+            "answer": "수요관리형 요금제는 효율적인 에너지 사용을 유도하기 위해 계절별 또는 시간대별 차등요금을 적용하는 제도입니다. 계절별 차등요금은 주택용 고객에게, 시간대별 차등요금은 일정 조건을 충족하는 업무용·공공용 고객에게 적용됩니다. 신청은 공문으로 요청하며 다음 달 1일부터 적용됩니다. 변경 후 1년 이내에는 다른 요금제로 바꿀 수 없습니다.",
+            "keywords": [
+                  "수요관리형요금제",
+                  "에너지절약",
+                  "계절별요금",
+                  "시간별요금",
+                  "신청방법"
+            ]
+      },
+      {
+            "category": "요금산정 / 요금부과",
+            "question": "건물 전체 공동난방비를 절약하려면 어떻게 해야 하나요?",
+            "answer": "외기온도 변화에 따라 난방·급탕 공급온도를 적절히 조절하고, 겨울철 운전기준을 벗어나지 않도록 관리합니다. 기계실의 TCV, 자동제어시스템, 열교환기, 배관 상태를 점검하고 수질관리와 스케일 제거를 실시하면 열효율이 향상됩니다. 환풍구, 출입문, 복도창문 관리와 세대 계량기 점검도 필요합니다.",
+            "keywords": [
+                  "공동난방비절약",
+                  "외기온도보상",
+                  "난방온도조절",
+                  "설비점검",
+                  "에너지효율"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "아파트 단지 내에 경매로 넘어간 세대의 체납 된 난방비는 어떻게 해야 하나요?",
+            "answer": "청라에너지는 경매 세대의 체납 난방비를 지원할 수 없습니다. 다음 입주민에게 정산받는 방법 등은 입주자대표회의와 상의해 해결해야 합니다.",
+            "keywords": [
+                  "경매세대",
+                  "체납난방비",
+                  "입주민부담",
+                  "관리주체",
+                  "채권확보"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금 자동이체를 신청하려 합니다. 신청 절차가 어떻게 되나요?",
+            "answer": "청라에너지 홈페이지 공지사항의 열요금 자동이체 신청 방법 안내를 확인한 뒤 거래은행에 직접 신청합니다. 신청 후에는 청라에너지 AI챗봇으로 자동이체 신청 확인을 진행합니다. 사업자번호, 법인명, 거래은행이 변경되면 기존 자동이체를 해지하고 재신청해야 합니다.",
+            "keywords": [
+                  "자동이체",
+                  "신청절차",
+                  "홈페이지",
+                  "공지사항",
+                  "계좌변경"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금을 자동이체 하고 있습니다. 통장잔액이 부족한 경우 잔액만큼 출금 되나요? 아니면 출금이 안 되나요?",
+            "answer": "은행 이체 마감시간 기준으로 1원이라도 부족하면 출금되지 않습니다. 고지서나 계좌이체로 직접 납부해야 하며, 연체 시 월 2%가 일할 계산되어 연체료가 발생합니다.",
+            "keywords": [
+                  "자동이체",
+                  "잔액부족",
+                  "미출금",
+                  "재출금",
+                  "납부기한"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금은 언제까지 납부해야하나요?",
+            "answer": "매월 1일부터 말일까지 사용한 열요금의 납기일은 다음 달 말일까지입니다. 예를 들어 1월 사용분은 2월 말일까지 납부해야 합니다.",
+            "keywords": [
+                  "열요금납부",
+                  "납기일",
+                  "말일기준",
+                  "사용기간",
+                  "요금납기"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금 납부기한을 놓쳤습니다. 어떻게 해야 하나요?",
+            "answer": "납부기한을 놓친 경우 보유한 고지서로 납부하거나 계좌이체하면 됩니다. 납부기한 후 납부하더라도 익월 고지서에 미납요금이 표시될 수 있고, 그 다음 달 고지서에 연체료가 일할 계산되어 부과됩니다.",
+            "keywords": [
+                  "납부기한",
+                  "미납요금",
+                  "계좌이체",
+                  "고지서납부",
+                  "연체료"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금 고지서를 받았습니다. 납기일을 하루 지나 납부했는데도 미납요금이 고지서에 표시 되었습니다. 고지서 재발행이 가능한가요?",
+            "answer": "말일 기준으로 수납마감을 하기 때문에 하루가 지나 납부해도 미납요금이 기재될 수 있습니다. 재발행은 불가능하며 미납금을 제외한 금액을 납부하면 됩니다.",
+            "keywords": [
+                  "미납표기",
+                  "수납마감",
+                  "납기일경과",
+                  "입금확인",
+                  "고지서출력"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금을 이중으로 납부했습니다. 환급절차는 어떻게 되나요?",
+            "answer": "이중납부 시 환급요청 공문, 통장사본, 이체내역 사본을 팩스로 보내면 확인 후 환급됩니다. 업무절차에 따라 약 2주 정도 소요될 수 있으며, 환급 통장 예금주명과 당사 등록 법인명이 동일해야 합니다.",
+            "keywords": [
+                  "이중납부",
+                  "환급절차",
+                  "환급요청",
+                  "구비서류",
+                  "팩스접수"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금 고지서를 받았습니다. 항목을 어떻게 보면 되나요?",
+            "answer": "고지서는 상단, 중단, 하단으로 구성됩니다. 상단에는 계좌번호, 자동이체 여부, 건물명, 수령주소, 공지사항이 표시됩니다. 중단에는 총 사용열량, 기본요금, 사용요금, 할인내역, 고객번호, 계약면적, 단가, 열량계별 사용량이 표시됩니다. 하단에는 공급가액, 세액, 연체료, 미납금액, 납부 총액이 표시됩니다.",
+            "keywords": [
+                  "고지서항목",
+                  "계좌번호",
+                  "자동이체안내",
+                  "사용량정보",
+                  "고지서보는법"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금 연체 시 불이익이 있나요? 연체료 감면은 가능한가요?",
+            "answer": "전기, 수도, 가스 등 다른 공공요금과 마찬가지로 연체료가 부과되며 감면할 수 없습니다. 연체료는 납기일 이후 실제 납부일까지 월 2%가 일할로 가산되고 다다음달 고지서에 합산 고지됩니다.",
+            "keywords": [
+                  "연체료",
+                  "공공요금",
+                  "감면불가",
+                  "연체이율",
+                  "납부독촉"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금을 계속 체납할 경우는 어떻게 되나요?",
+            "answer": "1개월 체납 시 연체알림공문을 발송합니다. 2개월 체납 시에는 독촉 공문과 체납액납부계획서를 요구합니다. 이후에도 체납이 계속되면 미회수채권 회수를 위해 가압류 등 법적 조치가 진행될 수 있습니다.",
+            "keywords": [
+                  "체납",
+                  "공급정지",
+                  "연체알림",
+                  "법적절차",
+                  "체납액납부계획서"
+            ]
+      },
+      {
+            "category": "납부 및 체납",
+            "question": "열요금 체납으로 정지된 후 열공급을 다시 받으려면 절차가 어떻게 되나요?",
+            "answer": "미납요금과 연체료를 완납한 뒤 동절기 3개월치 열요금에 해당하는 보증조치가 필요합니다. 보증금, 보증보험, 근저당, 연대보증 등이 가능하며 보증조치 후 열공급 재개가 가능합니다.",
+            "keywords": [
+                  "공급재개",
+                  "미납완납",
+                  "보증조치",
+                  "보증금",
+                  "재공급절차"
+            ]
+      },
+      {
+            "category": "고객정보변경 및 기타행정",
+            "question": "명의변경신청은 어떻게 하나요? 제출해야 하는 서류는 무엇 인가요?",
+            "answer": "명의변경신청은 청라에너지 AI챗봇을 통해 신청하면 담당자가 필요한 서류를 안내합니다. 제출서류는 명의변경신청서, 사업자등록증, 명의변경을 입증할 수 있는 서류입니다. 관리주체 계약서, 업무인수인계서, 입주자대표회의 회의록, 지자체 신고수리 통지공문 중 하나가 필요할 수 있습니다.",
+            "keywords": [
+                  "명의변경",
+                  "AI챗봇",
+                  "구비서류",
+                  "대표자변경",
+                  "서류안내"
+            ]
+      },
+      {
+            "category": "고객정보변경 및 기타행정",
+            "question": "세금계산서에 종전 대표자 이름으로 되어있습니다. 대표자 이름을 변경하여 재발행 가능한가요?",
+            "answer": "세금계산서는 사업자번호, 금액, 발행일자의 수정만 재발행 가능합니다. 대표자명 또는 담당자 변경은 다음 달부터 적용됩니다. 정보변경은 요금청구 업무가 집중되는 매월 초순을 피하고, 매월 말일 전에 AI챗봇으로 신청하는 것이 좋습니다.",
+            "keywords": [
+                  "세금계산서재발행",
+                  "대표자변경",
+                  "사업자정보",
+                  "수정발행",
+                  "발행기준"
+            ]
+      },
+      {
+            "category": "고객정보변경 및 기타행정",
+            "question": "세대 입주민이 집주소로 사업자등록을 했습니다. 난방비에 대해 관리비 고지서가 아닌 세금계산서 발행을 요청합니다. 세금계산서 발행은 관리사무소와 청라에너지 중 누가 발급해야 하나요?",
+            "answer": "청라에너지와의 계약 관계는 관리사무소 또는 입주자대표회의와 체결되어 있으므로 청라에너지는 관리소로만 세금계산서를 발행할 수 있습니다. 세대별 세금계산서 발행은 관리사무소 여건에 따라 처리합니다.",
+            "keywords": [
+                  "사업자등록",
+                  "세금계산서",
+                  "관리사무소계약",
+                  "세대부과",
+                  "증빙서류"
+            ]
+      },
+      {
+            "category": "세대요금",
+            "question": "세대에서 난방비를 절약하려면 어떻게 해야 하나요?",
+            "answer": "온도조절기를 급격히 올리지 말고 실내온도보다 0.5~1℃씩 천천히 설정합니다. 겨울철 실내온도는 18~20℃를 권장합니다. 햇빛이 들어올 때 커튼이나 블라인드를 열고, 창문 틈새와 외벽 단열을 보강합니다. 전기장판, 온수매트 등 보조난방기구 사용이 과도하면 건물 전체 열효율 저하와 공동난방비 증가 원인이 될 수 있습니다.",
+            "keywords": [
+                  "난방비절약",
+                  "온도조절기",
+                  "실내온도설정",
+                  "외출모드",
+                  "단열"
+            ]
+      },
+      {
+            "category": "세대요금",
+            "question": "사용하지 않는 방의 밸브를 잠궜습니다. 추우면서 요금은 더 나옵니다. 이유가 무엇인가요?",
+            "answer": "난방유량계 방식에서는 일부 방 밸브를 잠가도 차단된 유량이 다른 방으로 더 빨리 흐르기 때문에 전체 유량이 크게 줄지 않을 수 있습니다. 사용하지 않는 방 문을 열어두면 한기로 인한 열손실로 실내 전체가 더 춥게 느껴지고 설정온도 도달 시간이 길어져 요금이 증가할 수 있습니다.",
+            "keywords": [
+                  "방밸브차단",
+                  "난방비증가",
+                  "유량계",
+                  "편난방",
+                  "열손실"
+            ]
+      },
+      {
+            "category": "세대요금",
+            "question": "이번 달 난방사용량이 지난달보다 줄었는데, 세대 난방비는 더 많이 나왔습니다. 난방비가 더 많이 나온 이유가 무엇인가요?",
+            "answer": "사용량이 줄어도 기온 변화로 난방단가가 올라가면 세대 난방비가 더 많이 나올 수 있습니다. 겨울철에는 관리사무소가 난방·급탕 공급온도를 높이고, 유량계 사용 단지에서는 매월 난방단가 차이가 크게 발생할 수 있습니다.",
+            "keywords": [
+                  "난방비차이",
+                  "기온변화",
+                  "사용량감소",
+                  "열손실증가",
+                  "외기온도"
+            ]
+      },
+      {
+            "category": "세대요금",
+            "question": "겨울철 1층에 사는 세대가 중간층에 사는 세대보다 난방비가 많이 나오는 이유는 무엇인가요?",
+            "answer": "1층은 바닥 한기와 낮은 일조량으로 열손실이 많아 난방비가 많이 나올 수 있습니다. 필로티 위 2층, 꼭대기층, 가장자리 세대도 열손실이 큽니다. 새 아파트의 콘크리트 습기, 바닥 마감재, 화장실 난방코일 확장, 환기팬 등도 영향을 줄 수 있습니다. 창문 단열 보강과 화장실 난방 최소화가 도움이 됩니다.",
+            "keywords": [
+                  "1층난방비",
+                  "열손실",
+                  "바닥한기",
+                  "중간층차이",
+                  "단열효과"
+            ]
+      },
+      {
+            "category": "세대요금",
+            "question": "세대에서 계량기를 조작하여 난방을 부정사용하는 경우 어떻게 해야 하나요?",
+            "answer": "계량기를 변조하거나 부정사용하면 계량에 관한 법률에 따라 처벌받을 수 있습니다. 전체 세대에 처벌 조항과 부정사용 금지 내용을 안내하고, 의심 세대는 현장 방문으로 봉인 훼손 여부와 최초 미봉인 상태 등을 확인합니다. 고의가 아닌 경우에는 자체봉인, 사진 기록, 경고문구 등으로 대처할 수 있습니다.",
+            "keywords": [
+                  "부정사용",
+                  "계량기변조",
+                  "법적처벌",
+                  "계량기점검",
+                  "부정이득"
+            ]
+      },
+      {
+            "category": "지역난방의 일반",
+            "question": "지역난방, 중앙난방, 개별난방은 어떻게 다른가요?",
+            "answer": "지역난방은 대규모 열생산시설에서 생산한 열에너지를 배관으로 공급하는 방식입니다. 개별난방은 세대별 보일러를 설치하고, 중앙난방은 중앙기계실에서 보일러로 열을 생산해 세대에 공급합니다. 지역난방은 안전성, 유지보수성, 에너지효율, 환경개선 효과가 장점이며 초기투자비와 관리 상태에 따른 비용 변동이 단점입니다.",
+            "keywords": [
+                  "난방방식비교",
+                  "지역난방",
+                  "중앙난방",
+                  "개별난방",
+                  "에너지효율"
+            ]
+      },
+      {
+            "category": "지역난방의 일반",
+            "question": "지역난방의 공급과정과 그 원리는 무엇인가요?",
+            "answer": "청라에너지는 대규모 열생산시설의 폐열 등을 활용해 뜨거운 물을 이중보온관으로 각 건물 지하 기계실까지 공급합니다. 기계실에 도달한 지역난방 온수는 열교환기를 거쳐 각 가정의 난방·급탕수에 열을 전달합니다. 청라에너지는 열을 전달하는 것이며 세대 물을 직접 공급하는 것은 아닙니다. 재산한계점은 열생산시설부터 최초 차단밸브까지 청라에너지, 이후 기계실과 세대 설비는 관리사무소와 세대 관리 범위입니다.",
+            "keywords": [
+                  "지역난방원리",
+                  "공급과정",
+                  "열교환기",
+                  "열수송관",
+                  "대규모시설"
+            ]
+      },
+      {
+            "category": "지역난방의 일반",
+            "question": "청라에너지가 각 건물에 공급하는 온도와 관리사무소에서 세대로 공급하는 온도는 각각 몇 ℃인가요?",
+            "answer": "청라에너지에서 공급하는 지역난방 온도는 75~115℃입니다. 이 열에너지는 아파트 기계실 열교환기를 거쳐 세대에 난방 45~60℃, 급탕 45~55℃ 범위로 전달되도록 관리사무소에서 운영합니다. 외기온도, 운전형태, 계절 요인에 따라 다르게 운영될 수 있습니다.",
+            "keywords": [
+                  "공급온도",
+                  "열교환",
+                  "난방수온도",
+                  "관리사무소조절",
+                  "공급기준"
+            ]
+      },
+      {
+            "category": "지역난방의 일반",
+            "question": "여름철이나 환절기에도 난방을 가동 할 수 있나요?",
+            "answer": "청라에너지는 1년 365일 지역난방열을 중단 없이 공급합니다. 다만 각 아파트 입주자대표회의나 관리사무소가 공동난방비를 최소화하기 위해 여름철 등에 간헐 난방방식으로 전환할 수 있습니다.",
+            "keywords": [
+                  "여름철난방",
+                  "환절기난방",
+                  "365일공급",
+                  "단지별운영",
+                  "난방가동"
+            ]
+      }
+];
+
+    let faqs = embeddedFaqs;
+    let categories = [];
+    let quickTerms = ["에너지바우처", "자동이체", "기본요금", "명의변경", "연체료", "난방비 절약", "공급온도"];
+
+    const state = {
+      query: "",
+      category: "전체",
+      expandedIndex: null
+    };
+
+    const searchInput = document.querySelector("#searchInput");
+    const resultList = document.querySelector("#resultList");
+    const resultHeading = document.querySelector("#resultHeading");
+    const resultSummary = document.querySelector("#resultSummary");
+    const categoryList = document.querySelector("#categoryList");
+    const quickSearches = document.querySelector("#quickSearches");
+    const totalCount = document.querySelector("#totalCount");
+    const categoryToggle = document.querySelector("#categoryToggle");
+    const categorySidebar = document.querySelector("#categorySidebar");
+    const categoryClose = document.querySelector("#categoryClose");
+    const sidebarBackdrop = document.querySelector("#sidebarBackdrop");
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let cell = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"' && inQuotes && next === '"') {
+          cell += '"';
+          i += 1;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === "," && !inQuotes) {
+          row.push(cell);
+          cell = "";
+        } else if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (char === "\r" && next === "\n") i += 1;
+          row.push(cell);
+          rows.push(row);
+          row = [];
+          cell = "";
+        } else {
+          cell += char;
+        }
+      }
+
+      if (cell || row.length) {
+        row.push(cell);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function stripQuestionNumber(question) {
+      return question.replace(/^\s*\d+\.\s*/, "").trim();
+    }
+
+    function keywordList(value) {
+      return String(value || "")
+        .split(/[#,\s]+/)
+        .map(item => item.trim())
+        .filter(Boolean);
+    }
+
+    function inferCategory(question, keywords) {
+      const text = `${question} ${keywords.join(" ")}`;
+      const rules = [
+        ["복지·감면", /에너지바우처|감면|할인|취약|복지|임대주택|차상위|수급자/],
+        ["납부·고지", /자동이체|납부|연체|체납|고지서|환급|입금|계좌|수납|재발행/],
+        ["명의·정보변경", /명의|대표자|세금계산서|사업자|정보변경|법인명/],
+        ["설비·검침", /검침|열량계|계량기|기계실|밸브|공급온도|열교환|부정사용|공동난방|열손실/],
+        ["세대 난방", /난방비절약|온도조절기|1층|방밸브|세대난방|실내온도|단열|난방사용량/],
+        ["요금", /열요금|기본요금|사용요금|단가|요금제|급탕|오피스텔|Mcal|세대분배|수도료/],
+        ["지역난방 이해", /지역난방|중앙난방|개별난방|공급과정|원리|365일/]
+      ];
+      const match = rules.find(([, regex]) => regex.test(text));
+      return match ? match[0] : "기타";
+    }
+
+    function rowsToFaqs(rows) {
+      const header = rows[0] || [];
+      const qIndex = header.findIndex(cell => /질문|질문목록/.test(cell));
+      const aIndex = header.findIndex(cell => /답변/.test(cell));
+      const kIndex = header.findIndex(cell => /키워드/.test(cell));
+
+      return rows.slice(1)
+        .map(row => {
+          const questionRaw = row[qIndex >= 0 ? qIndex : 0] || "";
+          const answer = row[aIndex >= 0 ? aIndex : 1] || "";
+          const keywords = keywordList(row[kIndex >= 0 ? kIndex : 2] || "");
+          const question = stripQuestionNumber(questionRaw);
+          return {
+            category: inferCategory(question, keywords),
+            question,
+            answer: String(answer).replace(/^☞\s*/, "").trim(),
+            keywords
+          };
+        })
+        .filter(item => item.question && item.answer && item.question !== "질문목록");
+    }
+
+    async function loadSheetData() {
+      faqs = embeddedFaqs;
+    }
+
+    function openCategorySidebar() {
+      categorySidebar.classList.add("open");
+      sidebarBackdrop.classList.add("open");
+      categorySidebar.setAttribute("aria-hidden", "false");
+      categoryToggle.classList.add("active");
+      categoryToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeCategorySidebar() {
+      categorySidebar.classList.remove("open");
+      sidebarBackdrop.classList.remove("open");
+      categorySidebar.setAttribute("aria-hidden", "true");
+      categoryToggle.classList.remove("active");
+      categoryToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleCategorySidebar() {
+      if (categorySidebar.classList.contains("open")) {
+        closeCategorySidebar();
+      } else {
+        openCategorySidebar();
+      }
+    }
+
+    function refreshDerivedData() {
+      const categoryOrder = [
+        "감면제도/에너지바우처",
+        "요금산정 / 요금부과",
+        "납부 및 체납",
+        "고객정보변경 및 기타행정",
+        "세대요금",
+        "지역난방의 일반"
+      ];
+      const existingCategories = new Set(faqs.map(item => item.category));
+      categories = ["전체", ...categoryOrder.filter(category => existingCategories.has(category))];
+      quickTerms = Array.from(new Set([
+        "에너지바우처",
+        "자동이체",
+        "기본요금",
+        "명의변경",
+        "연체료",
+        "난방비 절약",
+        "공급온도",
+        ...faqs.flatMap(item => item.keywords.slice(0, 1))
+      ])).slice(0, 10);
+    }
+
+    function normalize(text) {
+      return String(text || "").toLowerCase().replace(/\s+/g, "");
+    }
+
+    function scoreItem(item, query) {
+      if (!query) return 1;
+      const q = normalize(query);
+      const question = normalize(item.question);
+      const category = normalize(item.category);
+      const keywords = normalize(item.keywords.join(" "));
+      const answer = normalize(item.answer);
+      let score = 0;
+      if (question.includes(q)) score += 8;
+      if (keywords.includes(q)) score += 6;
+      if (category.includes(q)) score += 4;
+      if (answer.includes(q)) score += 2;
+      q.split("").forEach(char => {
+        if (question.includes(char) || keywords.includes(char)) score += 0.2;
+      });
+      return score;
+    }
+
+    function getFilteredFaqs() {
+      const query = state.query.trim();
+      return faqs
+        .map((item, index) => ({ ...item, index, score: scoreItem(item, query) }))
+        .filter(item => state.category === "전체" || item.category === state.category)
+        .filter(item => !query || item.score >= Math.max(1.4, query.length * 0.35))
+        .sort((a, b) => b.score - a.score || a.question.localeCompare(b.question, "ko"));
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function answerParagraphs(answer) {
+      const normalized = String(answer || "").replace(/\s+/g, " ").trim();
+      if (!normalized) return [];
+
+      return normalized
+        .split(/(?<=[.!?。]|다\.|요\.|니다\.)\s+/)
+        .map(sentence => sentence.trim())
+        .filter(Boolean);
+    }
+
+    function renderQuickSearches() {
+      quickSearches.innerHTML = quickTerms.map(term => (
+        `<button class="quick-button" type="button" data-term="${escapeHtml(term)}">${escapeHtml(term)}</button>`
+      )).join("");
+    }
+
+    function renderCategories() {
+      categoryList.innerHTML = categories.map(category => {
+        const count = category === "전체" ? faqs.length : faqs.filter(item => item.category === category).length;
+        const active = category === state.category ? " active" : "";
+        return `<button class="category-tab${active}" type="button" data-category="${escapeHtml(category)}">
+          <span>${escapeHtml(category)}</span><strong>${count}</strong>
+        </button>`;
+      }).join("");
+      totalCount.textContent = faqs.length;
+    }
+
+    function renderResults() {
+      const results = getFilteredFaqs();
+      const query = state.query.trim();
+      resultHeading.textContent = query ? `"${query}" 검색 결과` : `${state.category} 질문`;
+      resultSummary.textContent = results.length
+        ? `${results.length}개의 관련 질문이 있습니다.`
+        : "관련 질문이 없습니다. 다른 표현으로 검색해 주세요.";
+
+      resultList.innerHTML = results.length ? results.map(item => {
+        const isOpen = item.index === state.expandedIndex;
+        const paragraphs = answerParagraphs(item.answer)
+          .map(line => `<p>${escapeHtml(line)}</p>`)
+          .join("");
+        const keywordChips = item.keywords
+          .map(keyword => `<span class="keyword-chip">${escapeHtml(keyword)}</span>`)
+          .join("");
+
+        return `
+        <article class="result-item${isOpen ? " open" : ""}">
+          <button class="result-question" type="button" data-index="${item.index}" aria-expanded="${isOpen}">
+            <span>
+              <span class="result-title">${escapeHtml(item.question)}</span>
+              <span class="result-meta">
+                <span class="pill">${escapeHtml(item.category)}</span>
+                <span>${escapeHtml(item.keywords.slice(0, 5).join(" · "))}</span>
+              </span>
+            </span>
+            <svg class="result-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="answer-body">
+            <div class="answer-inner">
+              <div class="answer-kicker">답변</div>
+              <div class="answer-content">
+                ${paragraphs}
+              </div>
+              <div class="answer-keywords">
+                <strong>키워드</strong>
+                ${keywordChips}
+              </div>
+              <div class="answer-tools">
+                <button class="button" type="button" data-copy-index="${item.index}">답변 복사</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+      }).join("") : `<div class="empty">검색어를 줄이거나 추천 검색어를 선택해 주세요.</div>`;
+    }
+
+    function resetAll() {
+      state.query = "";
+      state.category = "전체";
+      state.expandedIndex = null;
+      searchInput.value = "";
+      renderCategories();
+      renderResults();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function downloadManual() {
+      const today = new Date().toISOString().slice(0, 10);
+      const content = [
+        "청라에너지 지역냉난방 업무길라잡이",
+        `다운로드일: ${today}`,
+        "",
+        ...faqs.flatMap((item, index) => [
+          `${index + 1}. [${item.category}] ${item.question}`,
+          item.answer,
+          `키워드: ${item.keywords.join(", ")}`,
+          ""
+        ])
+      ].join("\n");
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "cheongna-energy-faq.txt";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    quickSearches.addEventListener("click", event => {
+      const button = event.target.closest("button[data-term]");
+      if (!button) return;
+      state.query = button.dataset.term;
+      state.expandedIndex = null;
+      searchInput.value = state.query;
+      renderResults();
+      resultList.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    categoryList.addEventListener("click", event => {
+      const button = event.target.closest("button[data-category]");
+      if (!button) return;
+      state.category = button.dataset.category;
+      state.expandedIndex = null;
+      renderCategories();
+      renderResults();
+      closeCategorySidebar();
+    });
+
+    resultList.addEventListener("click", async event => {
+      const button = event.target.closest("button[data-index]");
+      const copyButton = event.target.closest("button[data-copy-index]");
+
+      if (copyButton) {
+        const item = faqs[Number(copyButton.dataset.copyIndex)];
+        const text = `${item.question}\n\n${item.answer}`;
+        await navigator.clipboard.writeText(text);
+        copyButton.textContent = "복사 완료";
+        setTimeout(() => { copyButton.textContent = "답변 복사"; }, 1300);
+        return;
+      }
+
+      if (!button) return;
+      const index = Number(button.dataset.index);
+      state.expandedIndex = state.expandedIndex === index ? null : index;
+      renderResults();
+    });
+
+    searchInput.addEventListener("input", event => {
+      state.query = event.target.value;
+      state.expandedIndex = null;
+      renderResults();
+    });
+
+    document.querySelector("#clearSearch").addEventListener("click", () => {
+      state.query = "";
+      state.expandedIndex = null;
+      searchInput.value = "";
+      searchInput.focus();
+      renderResults();
+    });
+
+    document.querySelector("#brandHome").addEventListener("click", resetAll);
+    document.querySelector("#resetView").addEventListener("click", resetAll);
+    categoryToggle.addEventListener("click", toggleCategorySidebar);
+    categoryClose.addEventListener("click", closeCategorySidebar);
+    sidebarBackdrop.addEventListener("click", closeCategorySidebar);
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeCategorySidebar();
+    });
+    document.querySelector("#toTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.querySelector("#downloadTop").addEventListener("click", downloadManual);
+
+    async function init() {
+      await loadSheetData();
+      refreshDerivedData();
+      renderQuickSearches();
+      renderCategories();
+      renderResults();
+    }
+
+    init();
+  </script>
+</body>
+</html>
