@@ -1457,6 +1457,7 @@
     let faqs = embeddedFaqs;
     let categories = [];
     let quickTerms = ["에너지바우처", "자동이체", "명의변경", "연체료", "난방비 절약", "공급온도"];
+    const excludedQuickTermKeys = new Set(["에너지바우처등록기간", "열요금입금확인서", "기본요금"]);
 
     const state = {
       query: "",
@@ -1475,6 +1476,10 @@
     const categorySidebar = document.querySelector("#categorySidebar");
     const categoryClose = document.querySelector("#categoryClose");
     const sidebarBackdrop = document.querySelector("#sidebarBackdrop");
+
+    function isExcludedQuickTerm(term) {
+      return excludedQuickTermKeys.has(String(term || "").replace(/\s+/g, ""));
+    }
 
     function parseCsv(text) {
       const rows = [];
@@ -1603,13 +1608,12 @@
       quickTerms = Array.from(new Set([
         "에너지바우처",
         "자동이체",
-        "기본요금",
         "명의변경",
         "연체료",
         "난방비 절약",
         "공급온도",
         ...faqs.flatMap(item => item.keywords.slice(0, 1))
-      ])).filter(term => !["에너지바우처 등록기간", "열요금 입금확인서", "기본요금"].includes(term)).slice(0, 10);
+      ])).filter(term => !isExcludedQuickTerm(term)).slice(0, 10);
     }
 
     function normalize(text) {
@@ -1670,9 +1674,11 @@
     }
 
     function renderQuickSearches() {
-      quickSearches.innerHTML = quickTerms.map(term => (
-        `<button class="quick-button" type="button" data-term="${escapeHtml(term)}">${escapeHtml(term)}</button>`
-      )).join("");
+      quickSearches.innerHTML = quickTerms
+        .filter(term => !isExcludedQuickTerm(term))
+        .map(term => (
+          `<button class="quick-button" type="button" data-term="${escapeHtml(term)}">${escapeHtml(term)}</button>`
+        )).join("");
     }
 
     function renderCategories() {
