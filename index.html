@@ -342,10 +342,22 @@
     }
 
     .quick-button {
+      min-height: 26px;
       border-radius: 999px;
-      padding: 0 13px;
+      padding: 3px 9px;
+      display: inline-flex;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--line);
+      color: #42505a;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .quick-button:hover {
+      border-color: var(--brand);
       color: #004f8f;
-      font-weight: 750;
+      background: #f7fbff;
     }
 
     .layout {
@@ -969,8 +981,7 @@
                       "세대분배",
                       "관리비부과",
                       "사용요금",
-                      "기본요금",
-                      "공동난방비"
+                                    "공동난방비"
                 ]
           },
           {
@@ -1445,7 +1456,7 @@
 
     let faqs = embeddedFaqs;
     let categories = [];
-    let quickTerms = ["에너지바우처", "자동이체", "기본요금", "명의변경", "연체료", "난방비 절약", "공급온도"];
+    let quickTerms = ["에너지바우처", "자동이체", "명의변경", "연체료", "난방비 절약", "공급온도"];
 
     const state = {
       query: "",
@@ -1598,7 +1609,7 @@
         "난방비 절약",
         "공급온도",
         ...faqs.flatMap(item => item.keywords.slice(0, 1))
-      ])).slice(0, 10);
+      ])).filter(term => !["에너지바우처 등록기간", "열요금 입금확인서", "기본요금"].includes(term)).slice(0, 10);
     }
 
     function normalize(text) {
