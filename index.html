@@ -286,7 +286,7 @@
 
     .search-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: auto minmax(0, 1fr);
       gap: 10px;
       align-items: stretch;
     }
@@ -729,6 +729,13 @@
   <main>
     <section class="search-panel" aria-label="FAQ 검색">
       <div class="search-row">
+        <button class="category-fab" type="button" id="categoryToggle" aria-label="카테고리 열기" title="카테고리" aria-expanded="false" aria-controls="categorySidebar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <span>카테고리</span>
+        </button>
         <div class="search-wrap">
           <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="m21 21-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -737,13 +744,6 @@
           <input id="searchInput" type="search" autocomplete="off" placeholder="예: 에너지바우처, 자동이체, 기본요금, 명의변경">
           <button class="clear-button" type="button" id="clearSearch" aria-label="검색어 지우기" title="검색어 지우기">×</button>
         </div>
-        <button class="category-fab" type="button" id="categoryToggle" aria-label="카테고리 열기" title="카테고리" aria-expanded="false" aria-controls="categorySidebar">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-          <span>카테고리</span>
-        </button>
       </div>
       <div class="quick-searches" id="quickSearches" aria-label="추천 검색어"></div>
     </section>
