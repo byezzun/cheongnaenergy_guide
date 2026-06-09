@@ -1499,7 +1499,7 @@
 
     let faqs = embeddedFaqs;
     let categories = [];
-    let quickTerms = ["에너지바우처", "자동이체", "명의변경", "연체료", "난방비 절약", "공급온도"];
+    let quickTerms = ["에너지바우처", "감면제도", "고지서", "명의변경", "자동이체", "연체료", "사용량조회", "세대분배", "난방비 절약", "공급온도"];
     const excludedQuickTermKeys = new Set(["에너지바우처등록기간", "열요금입금확인서", "기본요금"]);
 
     const state = {
@@ -1648,15 +1648,18 @@
       ];
       const existingCategories = new Set(faqs.map(item => item.category));
       categories = ["전체", ...categoryOrder.filter(category => existingCategories.has(category))];
-      quickTerms = Array.from(new Set([
+      quickTerms = [
         "에너지바우처",
-        "자동이체",
+        "감면제도",
+        "고지서",
         "명의변경",
+        "자동이체",
         "연체료",
+        "사용량조회",
+        "세대분배",
         "난방비 절약",
-        "공급온도",
-        ...faqs.flatMap(item => item.keywords.slice(0, 1))
-      ])).filter(term => !isExcludedQuickTerm(term)).slice(0, 10);
+        "공급온도"
+      ];
     }
 
     function normalize(text) {
