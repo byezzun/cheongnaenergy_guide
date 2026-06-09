@@ -500,12 +500,12 @@
     .result-question {
       width: 100%;
       border: 0;
-      padding: 16px 18px;
+      padding: 15px 18px;
       background: transparent;
       text-align: left;
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 8px;
+      gap: 12px;
       align-items: center;
     }
 
@@ -515,12 +515,14 @@
 
     .result-question:hover,
     .result-question[aria-expanded="true"] {
-      background: var(--soft);
+      background: #fbfcfd;
     }
 
     .result-title {
       color: var(--ink);
-      font-weight: 800;
+      font-size: 0.98rem;
+      font-weight: 650;
+      line-height: 1.55;
     }
 
     .result-chevron {
@@ -537,18 +539,20 @@
       flex-wrap: wrap;
       gap: 6px;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.82rem;
+      margin-top: 5px;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
-      min-height: 24px;
+      min-height: 22px;
       border-radius: 999px;
-      padding: 0 8px;
-      background: rgba(0, 114, 188, 0.09);
-      color: #004f8f;
-      font-weight: 750;
+      padding: 0 7px;
+      background: #f3f6f8;
+      color: #65727c;
+      border: 1px solid #e7edf1;
+      font-weight: 600;
     }
 
     .answer-label {
@@ -565,7 +569,7 @@
 
     .answer-body {
       display: none;
-      padding: 0 18px 20px;
+      padding: 0 18px 22px;
       color: #2b3339;
     }
 
@@ -575,25 +579,21 @@
 
     .answer-inner {
       position: relative;
-      border: 1px solid rgba(0, 114, 188, 0.22);
-      border-left: 5px solid var(--brand);
+      border: 1px solid #e7edf1;
+      border-left: 3px solid rgba(0, 114, 188, 0.36);
       border-radius: 8px;
-      padding: 18px 18px 18px 20px;
-      background: #f7fbff;
-      box-shadow: 0 10px 24px rgba(0, 46, 84, 0.06);
+      padding: 20px 22px;
+      background: #fff;
+      box-shadow: none;
     }
 
     .answer-kicker {
-      margin: 0 0 12px;
+      margin: 0 0 14px;
       display: inline-flex;
-      min-height: 26px;
       align-items: center;
-      border-radius: 999px;
-      padding: 0 9px;
-      background: rgba(0, 114, 188, 0.11);
       color: #004f8f;
-      font-size: 0.86rem;
-      font-weight: 850;
+      font-size: 0.9rem;
+      font-weight: 700;
     }
 
     .answer-content {
@@ -603,45 +603,78 @@
 
     .answer-body p {
       margin: 0;
-      padding: 8px 0;
-      line-height: 1.75;
+      padding: 6px 0;
+      line-height: 1.82;
+      font-size: 0.98rem;
+      color: #25313a;
     }
 
     .answer-body p:last-child {
       padding-bottom: 0;
     }
 
-    .answer-keywords {
-      margin-top: 48px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      align-items: center;
+    .answer-body p.answer-section-line {
+      padding-top: 14px;
+      color: #16232d;
+      font-weight: 650;
     }
 
-    .answer-keywords strong {
-      margin-right: 2px;
+    .answer-body p.answer-section-line:first-child {
+      padding-top: 4px;
+    }
+
+    .answer-keywords {
+      margin-top: 34px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.88rem;
+    }
+
+    .answer-keywords summary {
+      width: fit-content;
+      cursor: pointer;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 650;
+    }
+
+    .answer-keywords summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .answer-keywords summary::after {
+      content: " 보기";
+      color: #7d8a93;
+      font-weight: 500;
+    }
+
+    .answer-keywords[open] summary {
+      margin-bottom: 10px;
+    }
+
+    .answer-keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
     }
 
     .keyword-chip {
-      min-height: 26px;
+      min-height: 24px;
       border-radius: 999px;
-      padding: 3px 9px;
+      padding: 2px 8px;
       display: inline-flex;
       align-items: center;
-      background: white;
-      border: 1px solid var(--line);
-      color: #42505a;
-      font-size: 0.86rem;
-      font-weight: 700;
+      background: #f7f9fa;
+      border: 1px solid #edf1f4;
+      color: #63717b;
+      font-size: 0.82rem;
+      font-weight: 600;
     }
 
     .answer-tools {
-      margin-top: 16px;
+      margin-top: 18px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -1701,7 +1734,10 @@
       resultList.innerHTML = results.length ? results.map(item => {
         const isOpen = item.index === state.expandedIndex;
         const paragraphs = answerParagraphs(item.answer)
-          .map(line => `<p>${escapeHtml(line)}</p>`)
+          .map(line => {
+            const isSectionLine = /^(①|②|③|④|⑤|⑥|⑦|⑧|⑨|⑩|\d+\)|\[|❍|ㅇ)/.test(line);
+            return `<p${isSectionLine ? " class=\"answer-section-line\"" : ""}>${escapeHtml(line)}</p>`;
+          })
           .join("");
         const keywordChips = item.keywords
           .map(keyword => `<span class="keyword-chip">${escapeHtml(keyword)}</span>`)
@@ -1726,10 +1762,12 @@
               <div class="answer-content">
                 ${paragraphs}
               </div>
-              <div class="answer-keywords">
-                <strong>키워드</strong>
-                ${keywordChips}
-              </div>
+              <details class="answer-keywords">
+                <summary>관련 키워드</summary>
+                <div class="answer-keyword-list">
+                  ${keywordChips}
+                </div>
+              </details>
               <div class="answer-tools">
                 <button class="button" type="button" data-copy-index="${item.index}">답변 복사</button>
               </div>
