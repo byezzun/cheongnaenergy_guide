@@ -1675,7 +1675,7 @@
         .map((item, index) => ({ ...item, index, score: scoreItem(item, query) }))
         .filter(item => state.category === "전체" || item.category === state.category)
         .filter(item => !query || item.score >= Math.max(1.4, query.length * 0.35))
-        .sort((a, b) => b.score - a.score || a.question.localeCompare(b.question, "ko"));
+        .sort((a, b) => query ? b.score - a.score || a.index - b.index : a.index - b.index);
     }
 
     function escapeHtml(value) {
