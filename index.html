@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>청라에너지 지역냉난방 업무길라잡이</title>
+  <title>청라에너지 열요금 업무 길라잡이</title>
   <style>
     :root {
       --ink: #17262d;
@@ -738,7 +738,7 @@
     <div class="topbar-inner">
       <button class="brand" type="button" id="brandHome" aria-label="처음으로 이동">
         <img class="brand-mark" src="assets/cheongna-energy-logo.jpg" alt="">
-        <span class="brand-name">청라에너지 업무길라잡이</span>
+        <span class="brand-name">청라에너지 열요금 업무 길라잡이</span>
       </button>
       <div class="top-actions">
         <button class="button" type="button" id="downloadTop">전체 다운로드</button>
@@ -761,7 +761,7 @@
         <strong>청라에너지 홈페이지</strong>
         <span>열요금 조회, 자료 신청, 상담 연결은 홈페이지와 AI 챗봇에서 확인할 수 있습니다.</span>
         <div class="home-actions">
-          <a class="home-link secondary" href="http://www.e-cheongna.co.kr" target="_blank" rel="noopener">
+          <a class="home-link secondary" href="http://www.cndh.co.kr" target="_blank" rel="noopener">
             홈페이지 / AI 챗봇 열기
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1228,7 +1228,7 @@
           {
                     "category": "납부 및 체납",
                     "question": "열요금 자동이체를 신청하려 합니다. 신청 절차가 어떻게 되나요?",
-                    "answer": "청라에너지 홈페이지(www.e-cheongna.co.kr)의 좌측하단 ‘공지사항’ → ‘열요금 자동이체(CMS) 신청 방법 안내’를 확인 후 거래은행에 직접 신청하시면 됩니다. \n 신청 후에는 청라에너지 AI챗봇을 통해 ‘자동이체신청 확인’을 해주시기 바랍니다. \n 아울러, 자동이체 이용 중 고객의 사업자번호, 법인명, 거래은행 변경 시 은행을 방문해 기존 자동이체는 해지하고 재신청하시기 바랍니다.",
+                    "answer": "청라에너지 홈페이지(www.cndh.co.kr)의 좌측하단 ‘공지사항’ → ‘열요금 자동이체(CMS) 신청 방법 안내’를 확인 후 거래은행에 직접 신청하시면 됩니다. \n 신청 후에는 청라에너지 AI챗봇을 통해 ‘자동이체신청 확인’을 해주시기 바랍니다. \n 아울러, 자동이체 이용 중 고객의 사업자번호, 법인명, 거래은행 변경 시 은행을 방문해 기존 자동이체는 해지하고 재신청하시기 바랍니다.",
                     "keywords": [
                               "자동이체",
                               "신청절차",
@@ -1667,6 +1667,15 @@
       return String(text || "").toLowerCase().replace(/\s+/g, "");
     }
 
+    function searchableText(item) {
+      return normalize([
+        item.question,
+        item.category,
+        item.keywords.join(" "),
+        item.answer
+      ].join(" "));
+    }
+
     function scoreItem(item, query) {
       if (!query) return 1;
       const q = normalize(query);
@@ -1674,14 +1683,16 @@
       const category = normalize(item.category);
       const keywords = normalize(item.keywords.join(" "));
       const answer = normalize(item.answer);
-      let score = 0;
-      if (question.includes(q)) score += 8;
-      if (keywords.includes(q)) score += 6;
-      if (category.includes(q)) score += 4;
-      if (answer.includes(q)) score += 2;
-      q.split("").forEach(char => {
-        if (question.includes(char) || keywords.includes(char)) score += 0.2;
-      });
+      const fullText = searchableText(item);
+
+      if (!fullText.includes(q)) return 0;
+
+      let score = 1;
+      if (question.includes(q)) score += 20;
+      if (keywords.includes(q)) score += 16;
+      if (category.includes(q)) score += 12;
+      if (answer.includes(q)) score += 8;
+      if (question.startsWith(q)) score += 4;
       return score;
     }
 
@@ -1690,7 +1701,7 @@
       return faqs
         .map((item, index) => ({ ...item, index, score: scoreItem(item, query) }))
         .filter(item => state.category === "전체" || item.category === state.category)
-        .filter(item => !query || item.score >= Math.max(1.4, query.length * 0.35))
+        .filter(item => !query || item.score > 0)
         .sort((a, b) => query ? b.score - a.score || a.index - b.index : a.index - b.index);
     }
 
@@ -1807,7 +1818,7 @@
     function downloadManual() {
       const today = new Date().toISOString().slice(0, 10);
       const content = [
-        "청라에너지 지역냉난방 업무길라잡이",
+        "청라에너지 열요금 업무 길라잡이",
         `다운로드일: ${today}`,
         "",
         ...faqs.flatMap((item, index) => [
