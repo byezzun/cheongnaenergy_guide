@@ -5,29 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>청라에너지 열요금 업무 길라잡이</title>
   <style>
-    @font-face {
-      font-family: "NanumSquare";
-      src: url("NanumSquareR.woff2") format("woff2");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: "NanumSquare";
-      src: url("NanumSquareB.woff2") format("woff2");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: "NanumSquare";
-      src: url("NanumSquareEB.woff2") format("woff2");
-      font-weight: 800 900;
-      font-style: normal;
-      font-display: swap;
-    }
+    @import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
 
     :root {
       --ink: #17262d;
@@ -55,7 +33,7 @@
       margin: 0;
       background: #f7fbfc;
       color: var(--ink);
-      font-family: "NanumSquare", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      font-family: "Wanted Sans Variable", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
       line-height: 1.55;
     }
 
@@ -102,7 +80,7 @@
       gap: 10px;
       min-width: 0;
       color: var(--navy);
-      font-weight: 800;
+      font-weight: 700;
       text-align: left;
     }
 
@@ -153,7 +131,7 @@
 
     .button {
       padding: 0 14px;
-      font-weight: 750;
+      font-weight: 600;
       white-space: nowrap;
     }
 
@@ -174,7 +152,7 @@
       gap: 8px;
       background: var(--paper);
       color: var(--navy);
-      font-weight: 800;
+      font-weight: 600;
       white-space: nowrap;
       transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
     }
@@ -213,6 +191,7 @@
     h1 {
       margin: 0 0 14px;
       font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
       line-height: 1.12;
       letter-spacing: 0;
     }
@@ -275,7 +254,7 @@
       color: white;
       background: rgba(255, 255, 255, 0.12);
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 600;
       white-space: nowrap;
     }
 
@@ -376,7 +355,7 @@
       border: 1px solid var(--line);
       color: #3f555d;
       font-size: 0.86rem;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .quick-button:hover {
@@ -452,6 +431,7 @@
     h2 {
       margin: 0;
       font-size: 1.05rem;
+      font-weight: 700;
       letter-spacing: 0;
     }
 
@@ -470,7 +450,7 @@
       padding: 0 8px;
       background: var(--brand);
       color: white;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 0.9rem;
     }
 
@@ -496,7 +476,7 @@
       border-color: rgba(0, 151, 167, 0.32);
       background: rgba(0, 151, 167, 0.08);
       color: var(--navy);
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .content {
@@ -546,7 +526,7 @@
     .result-title {
       color: var(--ink);
       font-size: 0.98rem;
-      font-weight: 650;
+      font-weight: 600;
       line-height: 1.55;
     }
 
@@ -577,7 +557,7 @@
       background: #edf8fa;
       color: #60737b;
       border: 1px solid #d9e8eb;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .answer-label {
@@ -588,7 +568,7 @@
       padding: 0 10px;
       background: rgba(243, 179, 64, 0.22);
       color: #745018;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 0.9rem;
     }
 
@@ -618,7 +598,7 @@
       align-items: center;
       color: var(--navy);
       font-size: 0.9rem;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .answer-content {
@@ -641,7 +621,7 @@
     .answer-body p.answer-section-line {
       padding-top: 14px;
       color: #12343f;
-      font-weight: 650;
+      font-weight: 600;
     }
 
     .answer-body p.answer-section-line:first-child {
@@ -661,7 +641,7 @@
       list-style: none;
       color: var(--muted);
       font-size: 0.84rem;
-      font-weight: 650;
+      font-weight: 600;
     }
 
     .answer-keywords summary::-webkit-details-marker {
@@ -695,7 +675,7 @@
       border: 1px solid #d9e8eb;
       color: #60737b;
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .answer-tools {
