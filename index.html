@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>청라에너지 열요금 업무 길라잡이</title>
   <style>
+    @font-face {
+      font-family: "NanumSquare";
+      src: url("NanumSquareR.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "NanumSquare";
+      src: url("NanumSquareB.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "NanumSquare";
+      src: url("NanumSquareEB.woff2") format("woff2");
+      font-weight: 800 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
       --ink: #17262d;
       --muted: #60737b;
@@ -31,7 +55,7 @@
       margin: 0;
       background: #f7fbfc;
       color: var(--ink);
-      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+      font-family: "NanumSquare", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
       line-height: 1.55;
     }
 
@@ -1891,27 +1915,12 @@
     }
 
     function downloadManual() {
-      const today = new Date().toISOString().slice(0, 10);
-      const content = [
-        "청라에너지 열요금 업무 길라잡이",
-        `다운로드일: ${today}`,
-        "",
-        ...faqs.flatMap((item, index) => [
-          `${index + 1}. [${item.category}] ${item.question}`,
-          item.answer,
-          `키워드: ${item.keywords.join(", ")}`,
-          ""
-        ])
-      ].join("\n");
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
-      link.href = url;
-      link.download = "cheongna-energy-faq.txt";
+      link.href = "2026-cheongnaenergy-heat-fee-guide.pdf";
+      link.download = "2026_청라에너지_열요금업무길라잡이.pdf";
       document.body.appendChild(link);
       link.click();
       link.remove();
-      URL.revokeObjectURL(url);
     }
 
     quickSearches.addEventListener("click", event => {
