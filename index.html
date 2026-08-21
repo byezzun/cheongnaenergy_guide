@@ -768,7 +768,8 @@
     .topbar-inner,
     .hero-inner,
     main {
-      max-width: 960px;
+      width: 100%;
+      max-width: 1180px;
     }
 
     .topbar-inner {
@@ -998,11 +999,22 @@
       background: transparent;
     }
 
+    @media (min-width: 900px) {
+      .category-list {
+        flex-wrap: nowrap;
+      }
+
+      .category-tab {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+    }
+
     .category-tab {
       min-height: 40px;
       width: auto;
       padding: 0 14px;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 7px;
       border-color: transparent;
       border-radius: 8px;
@@ -2256,6 +2268,14 @@
     let categories = [];
     let quickTerms = ["에너지바우처", "감면제도", "고지서", "명의변경", "자동이체", "연체료", "사용량조회", "세대분배", "난방비 절약", "공급온도"];
     const excludedQuickTermKeys = new Set(["에너지바우처등록기간", "열요금입금확인서", "기본요금"]);
+    const categoryLabels = {
+      "감면제도/에너지바우처": "감면·에너지바우처",
+      "요금산정 / 요금부과": "요금 산정·부과",
+      "납부 및 체납": "납부·체납",
+      "고객정보변경 및 기타행정": "고객정보 변경",
+      "세대요금": "세대요금",
+      "지역난방의 일반": "지역난방 일반"
+    };
 
     const state = {
       query: "",
@@ -2469,7 +2489,7 @@
         const count = category === "전체" ? faqs.length : faqs.filter(item => item.category === category).length;
         const active = category === state.category ? " active" : "";
         return `<button class="category-tab${active}" type="button" data-category="${escapeHtml(category)}">
-          <span>${escapeHtml(category)}</span><strong>${count}</strong>
+          <span>${escapeHtml(categoryLabels[category] || category)}</span><strong>${count}</strong>
         </button>`;
       }).join("");
     }
