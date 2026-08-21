@@ -768,7 +768,8 @@
     .topbar-inner,
     .hero-inner,
     main {
-      max-width: 960px;
+      width: 100%;
+      max-width: 1180px;
     }
 
     .topbar-inner {
@@ -932,7 +933,7 @@
 
     main {
       padding-top: 24px;
-      padding-bottom: 72px;
+      padding-bottom: 112px;
     }
 
     .search-panel {
@@ -998,11 +999,22 @@
       background: transparent;
     }
 
+    @media (min-width: 900px) {
+      .category-list {
+        flex-wrap: nowrap;
+      }
+
+      .category-tab {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+    }
+
     .category-tab {
       min-height: 40px;
       width: auto;
       padding: 0 14px;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 7px;
       border-color: transparent;
       border-radius: 8px;
@@ -1151,6 +1163,34 @@
       color: var(--muted);
       font-size: 0.92rem;
       font-weight: 400;
+    }
+
+    #resetView {
+      position: fixed;
+      right: 24px;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      z-index: 35;
+      min-height: 52px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      background: #333d4b;
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(25, 31, 40, 0.2);
+      transition: transform 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    #resetView:hover {
+      border-color: transparent;
+      background: var(--ink);
+      color: #ffffff;
+      box-shadow: 0 10px 28px rgba(25, 31, 40, 0.26);
+      transform: translateY(-2px);
     }
 
     .count-badge {
@@ -1368,7 +1408,23 @@
 
       main {
         padding-top: 20px;
-        padding-bottom: 48px;
+        padding-bottom: 104px;
+      }
+
+      #resetView {
+        right: 16px;
+        bottom: max(16px, env(safe-area-inset-bottom));
+        width: 50px;
+        min-height: 50px;
+        padding: 0;
+      }
+
+      #resetView span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
       }
 
       .search-panel {
@@ -1498,7 +1554,12 @@
               <h2 id="resultHeading">전체 질문</h2>
               <p id="resultSummary">시트 데이터를 불러오는 중입니다.</p>
             </div>
-            <button class="button" type="button" id="resetView">처음으로</button>
+            <button class="button" type="button" id="resetView" aria-label="검색 조건을 초기화하고 처음으로 이동" title="처음으로">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m4 11 8-7 8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>처음으로</span>
+            </button>
           </div>
           <div class="result-list" id="resultList">
             <div class="loading">데이터를 불러오고 있습니다.</div>
@@ -2256,6 +2317,14 @@
     let categories = [];
     let quickTerms = ["에너지바우처", "감면제도", "고지서", "명의변경", "자동이체", "연체료", "사용량조회", "세대분배", "난방비 절약", "공급온도"];
     const excludedQuickTermKeys = new Set(["에너지바우처등록기간", "열요금입금확인서", "기본요금"]);
+    const categoryLabels = {
+      "감면제도/에너지바우처": "감면·에너지바우처",
+      "요금산정 / 요금부과": "요금 산정·부과",
+      "납부 및 체납": "납부·체납",
+      "고객정보변경 및 기타행정": "고객정보 변경",
+      "세대요금": "세대요금",
+      "지역난방의 일반": "지역난방 일반"
+    };
 
     const state = {
       query: "",
@@ -2469,7 +2538,7 @@
         const count = category === "전체" ? faqs.length : faqs.filter(item => item.category === category).length;
         const active = category === state.category ? " active" : "";
         return `<button class="category-tab${active}" type="button" data-category="${escapeHtml(category)}">
-          <span>${escapeHtml(category)}</span><strong>${count}</strong>
+          <span>${escapeHtml(categoryLabels[category] || category)}</span><strong>${count}</strong>
         </button>`;
       }).join("");
     }
