@@ -735,6 +735,596 @@
         flex-direction: column;
       }
     }
+
+    /* Toss Design System-inspired visual refresh */
+    :root {
+      --ink: #191f28;
+      --muted: #6b7684;
+      --line: #e5e8eb;
+      --soft: #f2f4f6;
+      --paper: #ffffff;
+      --brand: #0748ff;
+      --brand-2: #2272eb;
+      --navy: #333d4b;
+      --accent: #0748ff;
+      --danger: #e42939;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      background: #f9fafb;
+      color: var(--ink);
+      font-family: "Wanted Sans Variable", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .topbar {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner,
+    .hero-inner,
+    main {
+      max-width: 960px;
+    }
+
+    .topbar-inner {
+      min-height: 64px;
+      padding: 10px 20px;
+    }
+
+    .brand {
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .brand:hover .brand-name,
+    .brand:focus-visible .brand-name {
+      color: var(--brand-2);
+    }
+
+    .brand:focus-visible,
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--brand-2);
+      outline-offset: 2px;
+    }
+
+    .button,
+    .icon-button,
+    .quick-button,
+    .category-tab,
+    .category-fab {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: #4e5968;
+      box-shadow: none;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    }
+
+    .button {
+      padding: 0 16px;
+      font-weight: 600;
+    }
+
+    #downloadTop {
+      border-color: var(--brand-2);
+      background: var(--brand-2);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    #downloadTop:hover {
+      border-color: #1b64da;
+      background: #1b64da;
+      color: #ffffff;
+    }
+
+    .button:hover,
+    .icon-button:hover,
+    .quick-button:hover,
+    .category-tab:hover {
+      border-color: #d1d6db;
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .hero-inner {
+      padding: 56px 20px 40px;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 40px;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      color: var(--ink);
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--brand-2);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .hero p b {
+      color: #4e5968;
+      font-weight: 600;
+    }
+
+    .home-card {
+      border: 0;
+      border-radius: 12px;
+      padding: 20px;
+      background: var(--soft);
+    }
+
+    .home-card strong {
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .home-card-label {
+      margin-bottom: 10px !important;
+      color: var(--brand-2) !important;
+      font-size: 0.8rem !important;
+      font-weight: 600;
+    }
+
+    .home-card span,
+    .chatbot-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .home-link,
+    .home-link.secondary {
+      min-height: 40px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--brand-2);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: none;
+    }
+
+    .home-link:hover,
+    .home-link.secondary:hover {
+      background: #1b64da;
+      color: #ffffff;
+      transform: none;
+    }
+
+    main {
+      padding-top: 24px;
+      padding-bottom: 72px;
+    }
+
+    .search-panel {
+      margin-top: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      background: var(--paper);
+      box-shadow: none;
+    }
+
+    .search-panel-head {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .search-panel-head h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.015em;
+    }
+
+    .search-panel-head p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 400;
+    }
+
+    .search-row {
+      gap: 10px;
+    }
+
+    .category-fab {
+      min-height: 52px;
+      border-color: var(--line);
+      color: #4e5968;
+      font-weight: 600;
+    }
+
+    .category-fab:hover,
+    .category-fab.active {
+      border-color: #b9d5ff;
+      background: #e8f3ff;
+      color: var(--brand-2);
+      transform: none;
+    }
+
+    .search-wrap {
+      min-height: 52px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--muted);
+      box-shadow: none;
+    }
+
+    .search-wrap:focus-within {
+      border-color: var(--brand-2);
+      background: var(--paper);
+      box-shadow: 0 0 0 1px var(--brand-2);
+    }
+
+    .search-wrap input {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    #searchInput,
+    #searchInput:focus {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .search-wrap input::placeholder {
+      color: #8b95a1;
+    }
+
+    .clear-button {
+      color: #8b95a1;
+    }
+
+    .quick-searches {
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .quick-button {
+      min-height: 34px;
+      padding: 0 12px;
+      border-color: transparent;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #4e5968;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .quick-button:hover {
+      border-color: transparent;
+      background: #e8f3ff;
+      color: var(--brand-2);
+    }
+
+    .layout {
+      margin-top: 24px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .section-head {
+      padding: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head h2,
+    .sidebar-head h2 {
+      color: var(--ink);
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+    }
+
+    .section-head p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 400;
+    }
+
+    .count-badge {
+      border: 0;
+      background: var(--soft);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .result-list {
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .result-item {
+      border-color: var(--line);
+      background: var(--paper);
+    }
+
+    .result-question {
+      min-height: 72px;
+      padding: 20px 24px;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .result-question:hover {
+      background: #f9fafb;
+    }
+
+    .result-question .chevron {
+      color: #8b95a1;
+    }
+
+    .result-title {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .result-chevron {
+      color: #8b95a1;
+    }
+
+    .result-item.open .result-question {
+      background: #f9fafb;
+      color: var(--ink);
+    }
+
+    .result-item.open .result-question .chevron {
+      color: var(--brand-2);
+    }
+
+    .result-question[aria-expanded="true"] .result-chevron {
+      color: var(--brand-2);
+    }
+
+    .result-meta {
+      color: #8b95a1;
+    }
+
+    .pill {
+      border: 0;
+      background: var(--soft);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .answer-body {
+      background: #f9fafb;
+    }
+
+    .answer-inner {
+      margin: 0 24px;
+      padding: 4px 0 28px;
+      border: 0;
+      border-top: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .answer-kicker {
+      margin-top: 20px;
+      color: var(--brand-2);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .answer-label {
+      border-radius: 6px;
+      background: #e8f3ff;
+      color: var(--brand-2);
+      font-weight: 600;
+    }
+
+    .answer-body p {
+      color: #4e5968;
+      font-size: 0.96rem;
+      font-weight: 400;
+      line-height: 1.72;
+    }
+
+    .answer-body p.answer-section-line {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .answer-keywords {
+      border-color: var(--line);
+      color: var(--muted);
+    }
+
+    .answer-keywords summary,
+    .answer-keywords summary::after {
+      color: var(--muted);
+    }
+
+    .keyword-chip {
+      border: 0;
+      background: var(--soft);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .sidebar {
+      border-color: var(--line);
+      background: var(--paper);
+      box-shadow: 8px 0 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .sidebar-head,
+    .category-list {
+      border-color: var(--line);
+      background: var(--paper);
+    }
+
+    .sidebar-close {
+      border-color: var(--line);
+      background: var(--paper);
+      color: var(--muted);
+    }
+
+    .category-tab {
+      color: #4e5968;
+      font-weight: 500;
+    }
+
+    .category-tab.active {
+      border-color: transparent;
+      background: #e8f3ff;
+      color: var(--brand-2);
+      font-weight: 600;
+    }
+
+    .source-note,
+    .empty,
+    .loading {
+      color: var(--muted);
+    }
+
+    @media (max-width: 880px) {
+      .hero-inner {
+        padding-top: 40px;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .home-card {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner,
+      .hero-inner,
+      main {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .topbar-inner {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+      }
+
+      .brand-name {
+        max-width: 140px;
+        font-size: 0.9rem;
+      }
+
+      #downloadTop {
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 0.88rem;
+      }
+
+      #toTop {
+        display: none;
+      }
+
+      .hero-inner {
+        padding-top: 36px;
+        padding-bottom: 32px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding-top: 20px;
+        padding-bottom: 48px;
+      }
+
+      .search-panel {
+        padding: 16px;
+      }
+
+      .section-head,
+      .result-question {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .answer-inner {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -745,7 +1335,12 @@
         <span class="brand-name">청라에너지 열요금 업무 길라잡이</span>
       </button>
       <div class="top-actions">
-        <button class="button" type="button" id="downloadTop">전체 다운로드</button>
+        <button class="button" type="button" id="downloadTop">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>전체 다운로드</span>
+        </button>
         <button class="icon-button" type="button" id="toTop" aria-label="맨 위로 이동" title="맨 위로 이동">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
             <path d="m6 15 6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -758,10 +1353,12 @@
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <h1>업무 내용 검색</h1>
-        <p><b>요금</b> · <b>납부</b> · <b>감면</b> · <b>명의변경</b>처럼 필요한 단어만 입력하세요.</p>
+        <span class="hero-eyebrow">청라에너지 실무 FAQ</span>
+        <h1>필요한 열요금 업무를<br>빠르게 찾아보세요</h1>
+        <p><b>요금</b> · <b>납부</b> · <b>감면</b> · <b>명의변경</b>처럼 궁금한 업무의 핵심 단어만 입력하면 됩니다.</p>
       </div>
       <div class="home-card">
+        <span class="home-card-label">관련 서비스</span>
         <strong>청라에너지 홈페이지</strong>
         <span>열요금 조회, 자료 신청, 상담 연결은 홈페이지와 AI 챗봇에서 확인할 수 있습니다.</span>
         <div class="home-actions">
@@ -778,6 +1375,12 @@
 
   <main>
     <section class="search-panel" aria-label="FAQ 검색">
+      <div class="search-panel-head">
+        <div>
+          <h2>무엇을 찾고 계신가요?</h2>
+          <p>질문이나 업무 키워드로 길라잡이 전체를 검색해 보세요.</p>
+        </div>
+      </div>
       <div class="search-row">
         <button class="category-fab" type="button" id="categoryToggle" aria-label="카테고리 열기" title="카테고리" aria-expanded="false" aria-controls="categorySidebar">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
